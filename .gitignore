@@ -1,0 +1,9 @@
+# venv folder on local
+first-project
+
+#flask and python cache
+flask_session
+__pycache__
+
+# vscode workspace config
+.vscode
