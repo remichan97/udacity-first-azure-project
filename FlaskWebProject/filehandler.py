@@ -1,5 +1,7 @@
+"""
+The Azure Storage handling class.
+"""
 from azure.storage.blob import BlobServiceClient
-from config import Config as cfg
 
 class Storage:
 
@@ -12,3 +14,4 @@ class Storage:
 
 	def delete_file(self, filename):
 		self.container.delete_blob(filename)
+		

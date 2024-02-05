@@ -11,7 +11,9 @@ import FlaskWebProject.filehandler
 
 app = Flask(__name__)
 app.config.from_object(Config)
-# TODO: Add any logging levels and handlers with app.logger
+app.logger.setLevel(logging.WARNING)
+streamHandler = logging.StreamHandler()
+app.logger.addHandler(streamHandler)
 Session(app)
 db = SQLAlchemy(app)
 login = LoginManager(app)
