@@ -61,6 +61,7 @@ def post(id):
 @app.route('/delete/<int:id>', methods=['GET'])
 @login_required
 def delete(id):
+    # Delete post from the CMS
     post = Post.query.get(int(id))
     post.delete_post()
     return redirect(url_for('home'))

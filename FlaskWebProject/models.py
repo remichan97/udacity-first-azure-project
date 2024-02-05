@@ -69,6 +69,7 @@ class Post(db.Model):
         db.session.commit()
     
     def delete_post(self):
+        # Adding capability to delete a created post
         storage.delete_file(self.image_path)
         db.session.delete(self)
         db.session.commit()
