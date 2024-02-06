@@ -4,7 +4,8 @@ from azure.keyvault.secrets import SecretClient
 from azure.identity import DefaultAzureCredential
 
 basedir = os.path.abspath(os.path.dirname(__file__))
-# Adapted from the 
+# Adapted from the KeyVault examples at
+# https://github.com/Azure/azure-sdk-for-python/blob/main/sdk/keyvault/azure-keyvault-secrets/samples/hello_world.py
 vaulturl = f'https://article-vaults.vault.azure.net'
 credential = DefaultAzureCredential()
 secret = SecretClient(vault_url= vaulturl, credential= credential)
@@ -13,7 +14,6 @@ class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'secret-key'
 
     BLOB_ACCOUNT = os.environ.get('BLOB_ACCOUNT') or secret.get_secret('blob-account').value
-    # BLOB_STORAGE_KEY = os.environ.get('BLOB_STORAGE_KEY') or 'f4hu/yM/9+Xff3BJPnTXykP1wMHggwStABMRVT9aLCGpB93p/3OyxqkkrWzgmKRnUzHGdtX1J07M+ASt+fjDUQ=='
     STORAGE_CONNECTION_STRING = secret.get_secret('storage-connection-string').value
     
     BLOB_CONTAINER = os.environ.get('BLOB_CONTAINER') or secret.get_secret('blob-container-images').value
