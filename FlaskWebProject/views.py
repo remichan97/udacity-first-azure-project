@@ -75,13 +75,13 @@ def login():
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password')
-            app.logger.warning(f'A sign in attempt has failed')
+            print(f'A sign in attempt has failed')
             return redirect(url_for('login'))
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
             next_page = url_for('home')
-        app.logger.warning(f'User {form.username.data} has signed in successfully using the sign in form')
+        print(f'User {form.username.data} has signed in successfully using the sign in form')
         return redirect(next_page)
     session["state"] = str(uuid.uuid4())
     auth_url = _build_auth_url(scopes=Config.SCOPE, state=session["state"])
@@ -108,7 +108,7 @@ def authorized():
         user = User.query.filter_by(username="admin").first()
         login_user(user)
         _save_cache(cache)
-        app.logger.warning(f'User admin is authenticated using Sign in with Microsoft option')
+        print(f'User admin is authenticated using Sign in with Microsoft option')
     return redirect(url_for('home'))
 
 @app.route('/logout')
